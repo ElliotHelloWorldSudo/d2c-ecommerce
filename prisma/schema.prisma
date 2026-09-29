@@ -1,0 +1,178 @@
+// This is your Prisma schema file for the D2C Fashion E-Commerce platform.
+// Learn more in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  CUSTOMER
+  ADMIN
+}
+
+enum OrderStatus {
+  ORDERED
+  CONFIRMED
+  PACKED
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+}
+
+model User {
+  id            String    @id @default(uuid())
+  name          String?
+  email         String    @unique
+  phone         String?
+  passwordHash  String?
+  role          Role      @default(CUSTOMER)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  addresses     Address[]
+  orders        Order[]
+  cart          Cart?
+  wishlist      Wishlist[]
+}
+
+model Address {
+  id            String    @id @default(uuid())
+  userId        String
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  fullName      String
+  phone         String
+  street        String
+  city          String
+  state         String
+  postalCode    String
+  country       String    @default("India")
+  isDefault     Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Category {
+  id            String        @id @default(uuid())
+  name          String        @unique // e.g. "Jeans", "Tops"
+  slug          String        @unique
+  description   String?
+  subcategories Subcategory[]
+  createdAt     DateTime      @default(now())
+}
+
+model Subcategory {
+  id          String    @id @default(uuid())
+  categoryId  String
+  category    Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  name        String    // e.g. "Baggy", "Wide-leg"
+  slug        String    @unique
+  products    Product[]
+  createdAt   DateTime  @default(now())
+}
+
+model Product {
+  id            String           @id @default(uuid())
+  subcategoryId String
+  subcategory   Subcategory      @relation(fields: [subcategoryId], references: [id])
+  name          String           // e.g. "Washed Blue Baggy 01"
+  slug          String           @unique
+  description   String
+  basePrice     Decimal          // Configurable price (TBD)
+  isFeatured    Boolean          @default(false)
+  isActive      Boolean          @default(true)
+  variants      ProductVariant[]
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+  Wishlist      Wishlist[]
+}
+
+model ProductVariant {
+  id          String         @id @default(uuid())
+  productId   String
+  product     Product        @relation(fields: [productId], references: [id], onDelete: Cascade)
+  colorName   String         // e.g. "Washed Blue"
+  colorHex    String?        // Color swatch hex
+  images      String[]       // Array of image URLs
+  sizes       VariantStock[]
+  createdAt   DateTime       @default(now())
+}
+
+model VariantStock {
+  id          String         @id @default(uuid())
+  variantId   String
+  variant     ProductVariant @relation(fields: [variantId], references: [id], onDelete: Cascade)
+  size        String         // e.g. "28", "30", "32", "34", "36"
+  stock       Int            @default(0)
+  sku         String         @unique
+  cartItems   CartItem[]
+}
+
+model Cart {
+  id        String     @id @default(uuid())
+  userId    String?    @unique
+  user      User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items     CartItem[]
+  updatedAt DateTime   @updatedAt
+}
+
+model CartItem {
+  id             String       @id @default(uuid())
+  cartId         String
+  cart           Cart         @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  variantStockId String
+  variantStock   VariantStock @relation(fields: [variantStockId], references: [id])
+  quantity       Int          @default(1)
+}
+
+model Order {
+  id              String        @id @default(uuid())
+  orderNumber     String        @unique
+  userId          String?
+  user            User?         @relation(fields: [userId], references: [id])
+  customerEmail   String
+  customerPhone   String
+  shippingAddress Json          // Address snapshot
+  totalAmount     Decimal
+  status          OrderStatus   @default(ORDERED)
+  paymentStatus   PaymentStatus @default(PENDING)
+  paymentId       String?
+  items           OrderItem[]
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+}
+
+model OrderItem {
+  id            String   @id @default(uuid())
+  orderId       String
+  order         Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId     String
+  productName   String
+  variantName   String
+  size          String
+  unitPrice     Decimal
+  quantity      Int
+  image         String
+}
+
+model Wishlist {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([userId, productId])
+}

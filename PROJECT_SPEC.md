@@ -162,6 +162,12 @@ Washed Blue
 
 Avoid excessive marketplace-style information. Product imagery should remain the primary visual element.
 
+### Proposed browsing interaction concept (TBD)
+
+Explore a distinctive product browsing interaction. The normal product grid can remain two-column or adapt responsively. When a shopper presses and holds a product card, the card could lift above the page, smoothly grow, and move toward a comfortable center or focus area while the surrounding page receives a subtle dark, translucent overlay. On desktop, hover may offer a subtle preview, while click or press may trigger the focus state. On mobile, a long press may trigger it because hover is unavailable. Releasing should return the card smoothly to its original position. Tapping or clicking while focused may open the product detail page.
+
+Keep the motion subtle, fashion-editorial, and purposeful rather than gimmicky. Leave the exact timing, scale, colors, trigger behavior, and other interaction details undecided for later prototyping and testing.
+
 ---
 
 ## 7. Responsive Design
@@ -833,6 +839,36 @@ The site should feel like a real fashion brand rather than a generic dashboard o
 - Final testing
 - Analytics/monitoring
 - Launch
+
+### Future Platform / Marketplace Expansion
+
+The initial product is a single-brand D2C e-commerce store.
+
+In a future phase, the platform may evolve into a multi-brand fashion marketplace similar in concept to large fashion e-commerce platforms.
+
+Potential future capabilities may include:
+
+- Multiple brands/sellers
+- Seller accounts and onboarding
+- Seller dashboards
+- Seller-specific product/catalogue management
+- Seller-specific inventory
+- Marketplace-wide search and filtering
+- Seller commissions and payouts
+- Multi-seller orders
+- Seller-specific shipping and fulfillment
+- Marketplace returns/refunds
+- Seller analytics
+- Platform-level promotions
+- Expanded brand/category management
+
+Important:
+- This is FUTURE SCOPE ONLY.
+- None of these marketplace features should be implemented in the current phase.
+- The current project remains a single-brand D2C store.
+- The architecture should be sensible for the current D2C scope while avoiding unnecessary decisions that would make future marketplace expansion difficult.
+- Do not turn the current project into a marketplace.
+- Do not change the existing technology stack or architecture because of this addition.
 
 ---
 
