@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ShoppingBag, Heart, User, Search, Menu, X } from 'lucide-react';
 import styles from './Header.module.css';
 
@@ -20,18 +21,24 @@ export const Header: React.FC = () => {
           {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
 
-        {/* Brand Logo Placeholder */}
-        <Link href="/" className={styles.logo}>
-          <span className={styles.logoBadge}>NEW</span>
-          <span className={styles.logoText}>STREETWEAR</span>
+        {/* Brand Logo: DTWN★ */}
+        <Link href="/" className={styles.logo} aria-label="DTWN Home">
+          <Image
+            src="/images/dtwn-logo.png"
+            alt="DTWN"
+            width={94}
+            height={24}
+            priority
+            className={styles.logoImg}
+          />
         </Link>
 
         {/* Navigation Links (Desktop) */}
         <nav className={styles.desktopNav}>
-          <Link href="/shop" className={styles.navLink}>Shop All</Link>
+          <Link href="/shop" className={`${styles.navLink} ${styles.navLinkShopAll}`}>Shop All</Link>
           <Link href="/shop/baggy" className={styles.navLink}>Baggy Jeans</Link>
           <Link href="/shop/wide-leg" className={styles.navLink}>Wide-Leg Jeans</Link>
-          <Link href="/about" className={styles.navLinkSubtle}>About</Link>
+          <Link href="/about" className={`${styles.navLink} ${styles.navLinkAbout}`}>About</Link>
         </nav>
 
         {/* Right Actions */}

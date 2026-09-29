@@ -1,0 +1,188 @@
+/* ===========================================================
+   HeroSection — Dirttown Campaign Hero
+   Dark atmospheric editorial hero with isolated MEET DIRTTOWN
+   artwork, dual physical spotlights, and white typography
+   =========================================================== */
+
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh - var(--header-height, 72px));
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background-color: #080808;
+  color: #ffffff;
+}
+
+/* ── Deep dark canvas ───────────────────────────── */
+.heroBg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-color: #080808;
+}
+
+/* ── Atmospheric overlay ────────────────────────── */
+.atmosphericOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 50%, transparent 40%, rgba(8, 8, 8, 0.65) 100%),
+    linear-gradient(180deg, rgba(8, 8, 8, 0.2) 0%, rgba(8, 8, 8, 0.7) 100%);
+  pointer-events: none;
+}
+
+/* ── Main Hero Grid Container ───────────────────── */
+.heroContainer {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: center;
+  gap: clamp(2rem, 4vw, 4rem);
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.heroVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Artwork Frame (MEET DIRTTOWN Isolated) ──────── */
+.artworkFrame {
+  position: relative;
+  width: 100%;
+  height: min(72vh, 560px);
+  min-height: 380px;
+  /* Shift slightly to the RIGHT from current position */
+  margin-left: clamp(1.5rem, 4vw, 3.5rem);
+}
+
+.artworkImage {
+  object-fit: contain;
+  object-position: left center;
+  opacity: 0.96;
+}
+
+/* ── Foreground Content ─────────────────────────── */
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: flex-start;
+  text-align: left;
+  max-width: 440px;
+  /* Shifted further RIGHT as a collective group */
+  margin-left: auto;
+  margin-right: clamp(1rem, 4vw, 3.5rem);
+}
+
+/* ── Headline Group ─────────────────────────────── */
+.headlineGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.mainHeadline {
+  font-size: clamp(2rem, 3.4vw, 3.25rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: #ffffff;
+  font-style: italic;
+}
+
+.subline {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ── Single Minimal CTA ─────────────────────────── */
+.heroCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.95rem 2.25rem;
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition:
+    border-color 0.25s ease,
+    background-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.2s ease;
+}
+
+.heroCta:hover {
+  background-color: #ffffff;
+  color: #080808;
+  border-color: #ffffff;
+  transform: translateX(4px);
+}
+
+/* ── Campaign Line ──────────────────────────────── */
+.campaignLine {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  margin-top: -0.5rem;
+}
+
+/* ── Mobile Responsive (Tablet & Phone) ─────────── */
+@media (max-width: 899px) {
+  .hero {
+    min-height: auto;
+    align-items: flex-start;
+  }
+
+  .heroContainer {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+  }
+
+  .artworkFrame {
+    height: 42vh;
+    max-height: 340px;
+    min-height: 240px;
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .artworkImage {
+    object-position: center center;
+  }
+
+  .heroContent {
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+
+  .mainHeadline {
+    font-size: clamp(1.85rem, 8vw, 2.5rem);
+  }
+}

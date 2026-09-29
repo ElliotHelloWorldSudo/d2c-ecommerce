@@ -1,0 +1,14 @@
+.spotlightCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 4; /* Floats above background, beams illuminate under text and artwork */
+  overflow: visible;
+}
+
+.fixtureGroup {
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7));
+}

@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ProductCard } from '@/components/storefront/ProductCard';
 import { INITIAL_PRODUCTS } from '@/lib/mockData';
 import styles from './page.module.css';
+import HeroSection from '@/components/storefront/HeroSection';
 
 export default function HomePage() {
   const [activeFilter, setActiveFilter] = useState<'All' | 'Baggy' | 'Wide-leg'>('All');
@@ -17,34 +18,8 @@ export default function HomePage() {
 
   return (
     <div className={styles.homeWrapper}>
-      {/* Editorial Hero Banner */}
-      <section className={styles.heroSection}>
-        <div className={styles.heroImageContainer}>
-          <Image
-            src="https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1600&auto=format&fit=crop"
-            alt="New Streetwear Collection Hero Editorial"
-            fill
-            priority
-            className={styles.heroImage}
-          />
-          <div className={styles.heroOverlay} />
-        </div>
-        <div className={`container ${styles.heroContent}`}>
-          <span className={styles.subTag}>INITIAL COLLECTION 01</span>
-          <h1 className="heading-hero">HEAVY DENIM.<br />BAGGY & WIDE-LEG.</h1>
-          <p className={styles.heroDescription}>
-            Engineered silhouettes crafted for modern Gen-Z streetwear culture. Discover the first drop of premium bottoms.
-          </p>
-          <div className={styles.heroCTA}>
-            <Link href="#catalogue" className={styles.btnPrimary}>
-              Explore Collection
-            </Link>
-            <Link href="/shop/baggy" className={styles.btnSecondary}>
-              Baggy Jeans
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Redesigned Hero */}
+      <HeroSection />
 
       {/* Category Spotlight Selector */}
       <section className={styles.categorySection}>
