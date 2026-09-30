@@ -148,6 +148,160 @@
   margin-top: -0.5rem;
 }
 
+/* ── Transitioning State & Exit Animations ───────── */
+.heroContainer.isTransitioning .artworkFrame {
+  animation: artworkExit 2.1s cubic-bezier(0.25, 1, 0.36, 1) forwards;
+  pointer-events: none;
+}
+
+.heroContainer.isTransitioning .heroContent {
+  animation: contentExit 2.1s cubic-bezier(0.25, 1, 0.36, 1) forwards;
+  pointer-events: none;
+}
+
+@keyframes artworkExit {
+  0% {
+    transform: translateX(0) scale(1);
+    opacity: 0.96;
+  }
+  35% {
+    transform: translateX(-50px) scale(0.89);
+    opacity: 0.55;
+  }
+  55% {
+    transform: translateX(-90px) scale(0.80);
+    opacity: 0.18;
+  }
+  75% {
+    transform: translateX(-135px) scale(0.73);
+    opacity: 0.04;
+  }
+  100% {
+    transform: translateX(-180px) scale(0.65);
+    opacity: 0;
+  }
+}
+
+@keyframes contentExit {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  35% {
+    transform: translateX(45px);
+    opacity: 0.55;
+  }
+  55% {
+    transform: translateX(80px);
+    opacity: 0.18;
+  }
+  75% {
+    transform: translateX(125px);
+    opacity: 0.04;
+  }
+  100% {
+    transform: translateX(170px);
+    opacity: 0;
+  }
+}
+
+/* ── Center DTWN★ Logo Reveal ───────────────────── */
+.logoRevealContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 25;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.logoRevealActive {
+  opacity: 1;
+  visibility: visible;
+}
+
+.logoRevealInner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: clamp(52px, 8.5vw, 88px);
+  filter: drop-shadow(0 4px 24px rgba(255, 255, 255, 0.12));
+}
+
+.revealChar {
+  display: inline-block;
+  height: 100%;
+  opacity: 0;
+  transform: translateY(14px) scale(0.92);
+  transform-origin: center center;
+  will-change: transform, opacity;
+}
+
+.revealImg {
+  height: 100%;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Staggered Entrance Animations: D -> T -> W -> N -> STAR */
+.logoRevealActive .charD {
+  animation: letterFadeIn 0.32s cubic-bezier(0.22, 1, 0.36, 1) 1.15s forwards;
+}
+
+.logoRevealActive .charT {
+  animation: letterFadeIn 0.32s cubic-bezier(0.22, 1, 0.36, 1) 1.38s forwards;
+}
+
+.logoRevealActive .charW {
+  animation: letterFadeIn 0.32s cubic-bezier(0.22, 1, 0.36, 1) 1.61s forwards;
+}
+
+.logoRevealActive .charN {
+  animation: letterFadeIn 0.32s cubic-bezier(0.22, 1, 0.36, 1) 1.84s forwards;
+}
+
+.logoRevealActive .charStar {
+  animation: starReveal 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 2.15s forwards;
+}
+
+@keyframes letterFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scale(0.92);
+  }
+  65% {
+    opacity: 1;
+    transform: translateY(-2px) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes starReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.2) rotate(-45deg);
+    filter: drop-shadow(0 0 0px rgba(255, 255, 255, 0));
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.22) rotate(6deg);
+    filter: drop-shadow(0 0 22px rgba(255, 255, 255, 0.85));
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
+  }
+}
+
 /* ── Mobile Responsive (Tablet & Phone) ─────────── */
 @media (max-width: 899px) {
   .hero {
@@ -185,4 +339,9 @@
   .mainHeadline {
     font-size: clamp(1.85rem, 8vw, 2.5rem);
   }
+
+  .logoRevealInner {
+    height: clamp(38px, 9vw, 56px);
+  }
 }
+
