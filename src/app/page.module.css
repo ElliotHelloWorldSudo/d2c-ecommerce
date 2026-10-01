@@ -42,7 +42,7 @@
 
 .categoryCard:hover {
   border-color: var(--text-main);
-  transform: translateY(-3px);
+  transform: translateY(-10px);
   box-shadow: var(--shadow-md);
 }
 

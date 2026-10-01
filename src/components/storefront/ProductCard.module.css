@@ -16,7 +16,7 @@ box-shadow:
 }
 
 .cardContainer:hover {
-transform: translateY(-4px);
+transform: translateY(-8px);
 box-shadow:
 0 10px 30px rgba(0, 0, 0, 0.08),
 0 3px 8px rgba(0, 0, 0, 0.04);
@@ -105,7 +105,7 @@ gap: 0.75rem;
 
 .productName {
 font-size: var(--font-size-base);
-font-weight: 700;
+font-weight: 500;
 letter-spacing: -0.01em;
 color: var(--text-main);
 text-transform: uppercase;
@@ -130,30 +130,33 @@ line-height: 1.4;
 }
 
 .swatchGroup {
-display: flex;
-align-items: center;
-gap: 0.4rem;
-margin-top: 0.45rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.2rem;
+  transform: translateX(7px);
 }
 
 .swatchDot {
-width: 14px;
-height: 14px;
-border-radius: 50%;
-border: 1px solid rgba(0, 0, 0, 0.2);
-transition:
-transform 0.2s ease,
-border-color 0.2s ease;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .swatchDot:hover {
-transform: scale(1.2);
+  transform: scale(1.2);
 }
 
 .swatchActive {
-transform: scale(1.25);
-border: 2px solid var(--text-main);
+  transform: scale(1.25);
+  border: 2px solid var(--text-main);
 }
+
+
 
 @media (prefers-reduced-motion: reduce) {
 .cardContainer,
