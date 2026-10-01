@@ -1,7 +1,6 @@
 import { Product } from '@/types';
 
 export const INITIAL_PRODUCTS: Product[] = [
-  // --- BAGGY JEANS (5 Items) ---
   {
     id: 'prod-baggy-01',
     name: 'Baggy 01',
